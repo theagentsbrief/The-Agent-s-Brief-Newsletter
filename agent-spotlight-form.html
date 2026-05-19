@@ -41,17 +41,18 @@
   .btn-submit { background:var(--gold); color:var(--navy); flex:1; font-size:14px; padding:14px 32px; }
   .btn-submit:hover { background:#b8962e; transform:translateY(-1px); }
   .optional-tag { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; color:rgba(201,168,76,.5); text-transform:uppercase; margin-left:8px; }
-  .required-tag { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-left:8px; }
   .success { display:none; text-align:center; padding:20px 0; animation:fadeUp .5s ease forwards; }
   .success-icon { width:64px; height:64px; border:2px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:28px; }
   .success h2 { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:600; color:var(--cream); margin-bottom:12px; }
-  .success p { font-size:14px; color:rgba(247,244,239,.55); line-height:1.7; margin-bottom:8px; }
+  .success p { font-size:14px; color:rgba(247,244,239,.55); line-height:1.7; margin-bottom:12px; }
   .success .gold { color:var(--gold); }
   .error-msg { font-family:'DM Mono',monospace; font-size:10px; color:#E07070; letter-spacing:1px; margin-top:6px; display:none; }
   .char-count { font-family:'DM Mono',monospace; font-size:9px; color:rgba(201,168,76,.4); text-align:right; margin-top:4px; }
-  /* Email capture banner on step 3 */
-  .email-banner { background:rgba(201,168,76,.08); border:1px solid rgba(201,168,76,.3); border-radius:4px; padding:12px 16px; margin-bottom:16px; }
-  .email-banner-text { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; }
+  .info-banner { background:rgba(201,168,76,.08); border:1px solid rgba(201,168,76,.3); border-radius:4px; padding:12px 16px; margin-bottom:16px; }
+  .info-banner-text { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; }
+  .step-list { list-style:none; margin-top:12px; }
+  .step-list li { display:flex; gap:12px; align-items:flex-start; margin-bottom:12px; font-size:13px; color:rgba(247,244,239,.7); line-height:1.6; }
+  .step-list li .num { min-width:22px; height:22px; background:var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'DM Mono',monospace; font-size:10px; color:var(--navy); font-weight:700; flex-shrink:0; margin-top:1px; }
   @media(max-width:500px){.card{padding:24px 20px}.step-question{font-size:20px}}
 </style>
 </head>
@@ -75,7 +76,7 @@
 
   <div class="card">
 
-    <!-- Step 1: Name -->
+    <!-- Step 1 -->
     <div class="step active" data-step="1">
       <div class="step-category">The Basics · 1 of 3</div>
       <div class="step-question">What's your full name?</div>
@@ -85,7 +86,7 @@
       <div class="error-msg" id="e1">Please enter your name.</div>
     </div>
 
-    <!-- Step 2: Market -->
+    <!-- Step 2 -->
     <div class="step" data-step="2">
       <div class="step-category">The Basics · 2 of 3</div>
       <div class="step-question">Where do you work?</div>
@@ -97,13 +98,13 @@
       <div class="error-msg" id="e2">Please fill in both fields.</div>
     </div>
 
-    <!-- Step 3: Contact — EMAIL REQUIRED -->
+    <!-- Step 3: Contact + Email subscribe -->
     <div class="step" data-step="3">
       <div class="step-category">The Basics · 3 of 3</div>
       <div class="step-question">How can we reach you?</div>
       <div class="step-hint">We'll follow up before publishing anything. Your email also subscribes you free to The Agent's Brief.</div>
-      <div class="email-banner">
-        <div class="email-banner-text">✦ Your email subscribes you free to The Agent's Brief</div>
+      <div class="info-banner">
+        <div class="info-banner-text">✦ Your email subscribes you free to The Agent's Brief</div>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;">
         <input type="email" id="q3a" placeholder="Email address (required)">
@@ -113,7 +114,7 @@
       <div class="error-msg" id="e3">Please enter a valid email address to continue.</div>
     </div>
 
-    <!-- Step 4: Origin -->
+    <!-- Step 4 -->
     <div class="step" data-step="4">
       <div class="step-category">Your Story · 1 of 3</div>
       <div class="step-question">How did you get into real estate?</div>
@@ -123,7 +124,7 @@
       <div class="error-msg" id="e4">Please share a bit about your background.</div>
     </div>
 
-    <!-- Step 5: Different -->
+    <!-- Step 5 -->
     <div class="step" data-step="5">
       <div class="step-category">Your Story · 2 of 3</div>
       <div class="step-question">What makes your approach different?</div>
@@ -133,7 +134,7 @@
       <div class="error-msg" id="e5">Please share what makes you different.</div>
     </div>
 
-    <!-- Step 6: Market -->
+    <!-- Step 6 -->
     <div class="step" data-step="6">
       <div class="step-category">Your Story · 3 of 3</div>
       <div class="step-question">What does your market look like right now?</div>
@@ -143,7 +144,7 @@
       <div class="error-msg" id="e6">Please share your market insight.</div>
     </div>
 
-    <!-- Step 7: Advice -->
+    <!-- Step 7 -->
     <div class="step" data-step="7">
       <div class="step-category">Your Insights · 1 of 2</div>
       <div class="step-question">What do you wish more agents knew?</div>
@@ -153,7 +154,7 @@
       <div class="error-msg" id="e7">Please share your advice.</div>
     </div>
 
-    <!-- Step 8: Promote -->
+    <!-- Step 8 -->
     <div class="step" data-step="8">
       <div class="step-category">Your Insights · 2 of 2</div>
       <div class="step-question">What do you want the community to know?</div>
@@ -163,7 +164,7 @@
       <div class="error-msg" id="e8">Please share something for the community.</div>
     </div>
 
-    <!-- Step 9: Quote -->
+    <!-- Step 9 -->
     <div class="step" data-step="9">
       <div class="step-category">Your Quote</div>
       <div class="step-question">Give us one quote.</div>
@@ -173,15 +174,21 @@
       <div class="error-msg" id="e9">Please provide a quote.</div>
     </div>
 
-    <!-- Step 10: Photo -->
+    <!-- Step 10: Photo with clear instructions -->
     <div class="step" data-step="10">
       <div class="step-category">Your Photo</div>
-      <div class="step-question">Send us your photo. <span class="optional-tag">optional</span></div>
-      <div class="step-hint">A clear headshot or professional photo. Square format preferred. Paste a link below or email it to us after submitting.</div>
-      <input type="url" id="q10" placeholder="https://link-to-your-photo.com">
-      <div style="margin-top:16px;padding:14px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:4px;">
-        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;">OR EMAIL DIRECTLY</div>
-        <div style="font-size:13px;color:rgba(247,244,239,.5);">hello@theagentsbrief.com</div>
+      <div class="step-question">One last thing — your photo. <span class="optional-tag">optional</span></div>
+      <div class="step-hint">No photo? No problem. But a headshot makes your spotlight shine. Here's how to include one:</div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.2);border-radius:6px;padding:18px 20px;margin-bottom:16px;">
+        <ul class="step-list">
+          <li><span class="num">1</span>When you hit Submit, your email app will open with your submission pre-filled.</li>
+          <li><span class="num">2</span>Before hitting Send — attach your photo directly to that email. Any headshot or professional photo works. Square format is best.</li>
+          <li><span class="num">3</span>Hit Send. That's it.</li>
+        </ul>
+        <div style="margin-top:4px;padding-top:12px;border-top:1px solid rgba(201,168,76,.15);">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:4px;">PREFER TO EMAIL SEPARATELY?</div>
+          <div style="font-size:12px;color:rgba(247,244,239,.4);">hello@theagentsbrief.com — just include your name in the subject line.</div>
+        </div>
       </div>
     </div>
 
@@ -194,13 +201,18 @@
     <!-- Success -->
     <div class="success" id="success">
       <div class="success-icon">✦</div>
-      <h2>You're in.</h2>
-      <p>Your submission is on its way to hello@theagentsbrief.com. We'll be in touch before we publish anything.</p>
-      <p class="gold">You're also now subscribed to The Agent's Brief — your free weekly newsletter starts Tuesday.</p>
-      <div style="margin-top:20px;padding:16px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:4px;">
-        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;">CHECK YOUR INBOX</div>
-        <div style="font-size:13px;color:rgba(247,244,239,.5);line-height:1.6;">A confirmation email is on its way. Click the link inside to confirm your subscription and get access to the free AI Prompt Pack.</div>
+      <h2>Almost there.</h2>
+      <p>Your email app is opening with your submission pre-filled.</p>
+      <div style="background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);border-radius:6px;padding:16px 18px;margin:16px 0;text-align:left;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:10px;">BEFORE YOU HIT SEND</div>
+        <ul class="step-list">
+          <li><span class="num">1</span>If you have a photo — attach it now. Any headshot or professional photo. Square format preferred.</li>
+          <li><span class="num">2</span>If you prefer no photo — that's perfectly fine. Just hit Send as is.</li>
+          <li><span class="num">3</span>Hit Send. We'll be in touch before publishing anything.</li>
+        </ul>
       </div>
+      <p class="gold">You're also now subscribed to The Agent's Brief — your free weekly newsletter starts Tuesday.</p>
+      <p style="font-size:12px;color:rgba(247,244,239,.3);margin-top:8px;">Check your inbox for a confirmation email from hello@theagentsbrief.com</p>
     </div>
 
   </div>
@@ -228,10 +240,7 @@
     hide('e'+s);
     if(s===1&&!document.getElementById('q1').value.trim()){show('e1');return false;}
     if(s===2&&(!document.getElementById('q2a').value.trim()||!document.getElementById('q2b').value.trim())){show('e2');return false;}
-    if(s===3){
-      const re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if(!re.test(document.getElementById('q3a').value.trim())){show('e3');return false;}
-    }
+    if(s===3){const re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;if(!re.test(document.getElementById('q3a').value.trim())){show('e3');return false;}}
     if(s===4&&!document.getElementById('q4').value.trim()){show('e4');return false;}
     if(s===5&&!document.getElementById('q5').value.trim()){show('e5');return false;}
     if(s===6&&!document.getElementById('q6').value.trim()){show('e6');return false;}
@@ -272,16 +281,14 @@
     const g=id=>document.getElementById(id).value.trim();
     const email=g('q3a');
 
-    // Subscribe via Beehiiv magic link silently in background
-    const magicUrl='https://magic.beehiiv.com/v1/b17494d9-6f52-4107-a761-e4abaa93a26f?email='+encodeURIComponent(email);
-    fetch(magicUrl,{method:'GET',mode:'no-cors'}).catch(()=>{});
-    // Also open magic link to ensure subscription goes through
-    window.open(magicUrl,'_blank');
+    // Subscribe via Beehiiv magic link
+    window.open('https://magic.beehiiv.com/v1/b17494d9-6f52-4107-a761-e4abaa93a26f?email='+encodeURIComponent(email),'_blank');
 
-    // Send submission via mailto
+    // Build mailto
     const subject=encodeURIComponent('Agent Spotlight Submission — '+g('q1'));
     const body=encodeURIComponent(
       'AGENT SPOTLIGHT SUBMISSION\n==========================\n\n'+
+      '*** IF YOU HAVE A PHOTO — ATTACH IT TO THIS EMAIL BEFORE HITTING SEND ***\n\n'+
       'NAME: '+g('q1')+'\nBROKERAGE: '+g('q2a')+'\nMARKET: '+g('q2b')+
       '\nEMAIL: '+email+'\nINSTAGRAM: '+(g('q3b')||'Not provided')+
       '\nWEBSITE: '+(g('q3c')||'Not provided')+
@@ -290,13 +297,12 @@
       '\n\nMARKET CONDITIONS:\n'+g('q6')+
       '\n\nADVICE FOR OTHER AGENTS:\n'+g('q7')+
       '\n\nWHAT THEY WANT TO PROMOTE:\n'+g('q8')+
-      '\n\nTHEIR QUOTE:\n"'+g('q9')+'"\n\nPHOTO LINK: '+(g('q10')||'Will email separately')
+      '\n\nTHEIR QUOTE:\n"'+g('q9')+'"'
     );
 
-    // Small delay so magic link tab opens first
     setTimeout(()=>{
       window.location.href='mailto:hello@theagentsbrief.com?subject='+subject+'&body='+body;
-    },800);
+    },600);
 
     // Show success
     document.querySelectorAll('.step').forEach(s=>s.style.display='none');
