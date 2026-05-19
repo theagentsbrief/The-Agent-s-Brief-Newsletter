@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Agent's Brief — Issue #[NUMBER]</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NJW8KKQP2Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NJW8KKQP2Q');
+</script>
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  #content-gate {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: linear-gradient(to bottom, transparent, #F7F4EF 40px);
+    padding-top: 60px;
+  }
+
+  #gate-box {
+    background: #1B2B5E;
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 36px 40px;
+    text-align: center;
+    border-top: 4px solid #C9A84C;
+  }
+
+  .gate-title {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #F7F4EF;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .gate-subtitle {
+    font-family: Georgia, serif;
+    font-size: 13px;
+    color: #9AA8C4;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .gate-form {
+    display: flex;
+    gap: 10px;
+    max-width: 420px;
+    margin: 0 auto 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .gate-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 13px 16px;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    outline: none;
+    color: #1B2B5E;
+  }
+
+  .gate-btn {
+    background: #C9A84C;
+    color: #1B2B5E;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 13px 24px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  .gate-btn:hover { background: #b8962e; }
+
+  .gate-fine-print {
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    color: #6B7A96;
+    letter-spacing: 1px;
+  }
+
+  /* Spotlight specific */
+  .spotlight-card {
+    background: #F7F4EF;
+    border: 1px solid #E8E3DA;
+    border-left: 4px solid #C9A84C;
+    border-radius: 4px;
+    padding: 24px;
+    margin: 16px 0;
+  }
+
+  .spotlight-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #C9A84C;
+    display: block;
+    margin: 0 auto 16px;
+  }
+
+  .spotlight-photo-placeholder {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #EEF1F8;
+    border: 3px dashed #C9A84C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    color: #C9A84C;
+    letter-spacing: 1px;
+    text-align: center;
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background-color:#F7F4EF;font-family:Georgia,'Times New Roman',serif;color:#1C1C1C;">
+
+<!-- Sticky Subscribe Bar -->
+<div style="position:sticky;top:0;z-index:998;background:#C9A84C;padding:12px 20px;text-align:center;">
+  <span style="font-family:Georgia,serif;font-size:13px;color:#1B2B5E;font-weight:600;margin-right:16px;">The Agent's Brief — Free newsletter for real estate agents.</span>
+  <a href="https://magic.beehiiv.com/v1/b17494d9-6f52-4107-a761-e4abaa93a26f?email={{email}}&redirect_to=https%3A%2F%2Ftheagentsbrief.github.io%2FThe-Agent-s-Brief-Newsletter%2F%3Fsubscribed%3Dtrue" style="display:inline-block;background:#1B2B5E;color:#C9A84C;font-family:Georgia,serif;font-size:12px;font-weight:700;padding:8px 20px;text-decoration:none;border-radius:2px;letter-spacing:0.5px;">Subscribe Free →</a>
+</div>
+
+<div style="max-width:620px;margin:0 auto;background:#FFFFFF;">
+
+  <div style="height:6px;background:#C9A84C;"></div>
+
+  <!-- Header -->
+  <div style="background:#1B2B5E;padding:36px 40px 32px;text-align:center;">
+    <div style="font-family:'Courier New',monospace;font-size:10px;letter-spacing:4px;color:#C9A84C;text-transform:uppercase;margin-bottom:12px;">Real Estate · Insights · Community</div>
+    <div style="font-family:Georgia,serif;font-size:42px;font-weight:700;color:#F7F4EF;letter-spacing:-1px;line-height:1.1;margin-bottom:8px;">The Agent's Brief</div>
+    <div style="font-family:Georgia,serif;font-size:13px;color:#9AA8C4;font-style:italic;margin-bottom:20px;">Your weekly edge. Every Tuesday morning.</div>
+    <div style="display:inline-block;font-family:'Courier New',monospace;font-size:9px;letter-spacing:2px;color:#C9A84C;border:1px solid rgba(201,168,76,0.3);padding:6px 16px;text-transform:uppercase;">Issue #[NUMBER] &nbsp;·&nbsp; [MONTH] [YEAR]</div>
+  </div>
+
+  <div style="height:6px;background:#C9A84C;"></div>
+
+  <!-- Intro band -->
+  <div style="background:#F7F4EF;padding:24px 40px;border-bottom:1px solid #E8E3DA;">
+    <p style="font-size:15px;line-height:1.8;color:#444444;margin:0;">[WRITE YOUR INTRO HERE — 2-3 sentences setting up this week's issue. Mention the spotlight agent by first name to create immediate curiosity.]</p>
+  </div>
+
+  <div style="padding:0 40px;background:#FFFFFF;">
+
+    <!-- Section 1: AI Win — ALWAYS VISIBLE -->
+    <div style="padding:32px 0;border-bottom:1px solid #E8E3DA;">
+      <div style="font-family:'Courier New',monospace;font-size:9px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:6px;">🔥 This Week's AI Win</div>
+      <div style="height:2px;background:#C9A84C;width:40px;margin-bottom:16px;"></div>
+      <h2 style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#1B2B5E;margin-bottom:14px;line-height:1.2;">[THIS WEEK'S AI WIN HEADLINE]</h2>
+      <p style="font-size:15px;line-height:1.85;color:#333333;margin-bottom:14px;">[AI Win paragraph one — 2-3 sentences. Share a real trend, insight, or stat about agents using AI.]</p>
+      <p style="font-size:15px;line-height:1.85;color:#333333;margin-bottom:0;">[AI Win paragraph two — wrap up with the key takeaway for agents.]</p>
+    </div>
+
+    <!-- GATED CONTENT -->
+    <div id="gated-sections">
+
+      <!-- ✦ AGENT SPOTLIGHT SECTION -->
+      <div style="padding:32px 0;border-bottom:1px solid #E8E3DA;">
+        <div style="font-family:'Courier New',monospace;font-size:9px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:6px;">✦ Agent Spotlight</div>
+        <div style="height:2px;background:#C9A84C;width:40px;margin-bottom:16px;"></div>
+        <h2 style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#1B2B5E;margin-bottom:14px;line-height:1.2;">[AGENT FIRST NAME] [AGENT LAST NAME] — [CITY, STATE]</h2>
+
+        <!-- Agent card -->
+        <div style="background:#F7F4EF;border:1px solid #E8E3DA;border-left:4px solid #C9A84C;border-radius:4px;padding:24px;margin:16px 0;">
+
+          <!-- PHOTO: Replace the placeholder div below with an img tag when you have the agent's photo -->
+          <!-- Option A — With photo: <img src="AGENT_PHOTO_URL" alt="Agent Name" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #C9A84C;display:block;margin:0 auto 16px;"> -->
+          <!-- Option B — Placeholder (use until you have photo): -->
+          <div style="width:100px;height:100px;border-radius:50%;background:#EEF1F8;border:3px dashed #C9A84C;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+            <span style="font-family:'Courier New',monospace;font-size:9px;color:#C9A84C;letter-spacing:1px;text-align:center;line-height:1.4;">AGENT<br>PHOTO</span>
+          </div>
+
+          <!-- Agent details -->
+          <div style="text-align:center;margin-bottom:16px;">
+            <div style="font-family:Georgia,serif;font-size:18px;font-weight:700;color:#1B2B5E;margin-bottom:4px;">[AGENT FULL NAME]</div>
+            <div style="font-family:'Courier New',monospace;font-size:10px;color:#C9A84C;letter-spacing:2px;text-transform:uppercase;">[BROKERAGE] · [CITY, STATE]</div>
+            <div style="font-family:Georgia,serif;font-size:12px;color:#888888;margin-top:4px;">[WEBSITE OR INSTAGRAM HANDLE]</div>
+          </div>
+
+          <div style="height:1px;background:#E8E3DA;margin-bottom:16px;"></div>
+
+          <!-- Agent story -->
+          <p style="font-size:14px;line-height:1.8;color:#333333;margin-bottom:12px;">[AGENT'S STORY — What makes them stand out? What's their market like? What are they doing differently? Write 2-3 paragraphs in a conversational tone. Quote them directly where possible.]</p>
+
+          <p style="font-size:14px;line-height:1.8;color:#333333;margin-bottom:12px;">[SECOND PARAGRAPH — Their insights on the market, their approach, their advice for other agents. Keep it genuine and specific.]</p>
+
+          <!-- Agent quote -->
+          <div style="background:#1B2B5E;border-left:4px solid #C9A84C;padding:16px 20px;margin:16px 0;border-radius:0 4px 4px 0;">
+            <p style="font-family:Georgia,serif;font-size:14px;line-height:1.8;color:#E8E3DA;font-style:italic;margin:0;">"[DIRECT QUOTE FROM THE AGENT — their advice, their philosophy, or their take on the market. Make it memorable.]"</p>
+            <div style="font-family:'Courier New',monospace;font-size:9px;color:#C9A84C;margin-top:8px;letter-spacing:1px;">— [AGENT NAME], [CITY]</div>
+          </div>
+
+          <!-- Agent listings or CTA (optional) -->
+          <p style="font-size:13px;line-height:1.7;color:#666666;margin-bottom:0;">[OPTIONAL — mention a current listing, recent sale, or specific thing they want the community to know. Keep it brief and value-focused, not salesy.]</p>
+
+        </div>
+
+        <p style="font-size:13px;line-height:1.7;color:#888888;font-style:italic;margin-top:12px;">Want to be featured in The Agent's Brief? Subscribe and reply to tell us your story. We'd love to hear from you.</p>
+      </div>
+
+      <!-- Tool of the Week -->
+      <div style="padding:32px 0;border-bottom:1px solid #E8E3DA;">
+        <div style="font-family:'Courier New',monospace;font-size:9px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:6px;">🛠 Tool of the Week</div>
+        <div style="height:2px;background:#C9A84C;width:40px;margin-bottom:16px;"></div>
+        <h2 style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#1B2B5E;margin-bottom:14px;line-height:1.2;">[TOOL NAME] — [ONE LINE DESCRIPTION]</h2>
+        <p style="font-size:15px;line-height:1.85;color:#333333;margin-bottom:14px;">[Tool intro — what it does, why agents should care. 2-3 sentences.]</p>
+        <div style="background:#EEF1F8;border-radius:4px;padding:18px 22px;margin:16px 0;">
+          <div style="font-family:'Courier New',monospace;font-size:14px;color:#1B2B5E;font-weight:700;margin-bottom:4px;">[TOOL NAME]</div>
+          <div style="font-size:13px;color:#555555;line-height:1.7;">[Detailed description — what it does specifically for real estate agents. Be concrete. Price if relevant.]</div>
+          <div style="font-family:'Courier New',monospace;font-size:11px;color:#C9A84C;margin-top:6px;">[WEBSITE URL]</div>
+        </div>
+        <p style="font-size:15px;line-height:1.85;color:#333333;margin-bottom:0;">[Closing thought — who it's best for and the one thing to try first.]</p>
+      </div>
+
+      <!-- Prompt of the Week -->
+      <div style="padding:32px 0;border-bottom:1px solid #E8E3DA;">
+        <div style="font-family:'Courier New',monospace;font-size:9px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:6px;">✍️ Prompt of the Week</div>
+        <div style="height:2px;background:#C9A84C;width:40px;margin-bottom:16px;"></div>
+        <h2 style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#1B2B5E;margin-bottom:14px;line-height:1.2;">[PROMPT HEADLINE]</h2>
+        <p style="font-size:15px;line-height:1.85;color:#333333;margin-bottom:14px;">[Brief setup — what situation this prompt solves for agents.]</p>
+        <div style="background:#1B2B5E;border-left:4px solid #C9A84C;padding:20px 24px;margin:16px 0;border-radius:0 4px 4px 0;">
+          <div style="font-family:'Courier New',monospace;font-size:8px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:10px;">Copy this prompt</div>
+          <p style="font-family:Georgia,serif;font-size:13px;line-height:1.8;color:#E8E3DA;font-style:italic;margin:0;">"[PASTE THE FULL PROMPT HERE — use [brackets] for variables agents should fill in]"</p>
+        </div>
+        <p style="font-size:15px;line-height:1.85;color:#333333;margin-bottom:0;">[Pro tip on how to get the best results from this prompt.]</p>
+      </div>
+
+      <!-- Quick Hits -->
+      <div style="padding:32px 0;">
+        <div style="font-family:'Courier New',monospace;font-size:9px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin-bottom:6px;">⚡ Quick Hits</div>
+        <div style="height:2px;background:#C9A84C;width:40px;margin-bottom:16px;"></div>
+        <h2 style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#1B2B5E;margin-bottom:16px;line-height:1.2;">What's worth knowing this week</h2>
+
+        <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
+          <div style="width:6px;height:6px;min-width:6px;background:#C9A84C;border-radius:50%;margin-top:8px;"></div>
+          <p style="font-size:14px;line-height:1.75;color:#333333;margin:0;">[QUICK HIT 1 — one verified news item or stat relevant to real estate agents. Include source.]</p>
+        </div>
+
+        <div style="display:flex;gap:14px;margin-bottom:14px;align-items:flex-start;">
+          <div style="width:6px;height:6px;min-width:6px;background:#C9A84C;border-radius:50%;margin-top:8px;"></div>
+          <p style="font-size:14px;line-height:1.75;color:#333333;margin:0;">[QUICK HIT 2 — one verified news item or stat. Keep it practical and relevant.]</p>
+        </div>
+
+        <div style="display:flex;gap:14px;margin-bottom:16px;align-items:flex-start;">
+          <div style="width:6px;height:6px;min-width:6px;background:#C9A84C;border-radius:50%;margin-top:8px;"></div>
+          <p style="font-size:14px;line-height:1.75;color:#333333;margin:0;">[QUICK HIT 3 — one verified news item or stat. End on something actionable.]</p>
+        </div>
+
+        <p style="font-family:'Courier New',monospace;font-size:9px;color:#AAAAAA;letter-spacing:1px;margin:0;">Sources: [LIST YOUR SOURCES HERE]</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- CTA Section -->
+  <div style="background:#1B2B5E;padding:36px 40px;text-align:center;">
+    <div style="font-family:Georgia,serif;font-size:22px;font-weight:700;color:#F7F4EF;margin-bottom:8px;">Want to be featured?</div>
+    <p style="font-size:13px;color:#9AA8C4;margin-bottom:24px;line-height:1.6;">Subscribe to The Agent's Brief and reply to tell us your story.<br>We feature agents with something worth sharing.</p>
+    <a href="https://magic.beehiiv.com/v1/b17494d9-6f52-4107-a761-e4abaa93a26f?email={{email}}&redirect_to=https%3A%2F%2Ftheagentsbrief.github.io%2FThe-Agent-s-Brief-Newsletter%2F%3Fsubscribed%3Dtrue" style="display:inline-block;background:#C9A84C;color:#1B2B5E;font-family:Georgia,serif;font-size:13px;font-weight:bold;padding:14px 36px;text-decoration:none;letter-spacing:0.5px;border-radius:2px;">Subscribe Free at theagentsbrief.com</a>
+  </div>
+
+  <!-- Footer -->
+  <div style="background:#F7F4EF;padding:24px 40px;text-align:center;border-top:1px solid #E8E3DA;">
+    <div style="font-family:Georgia,serif;font-size:18px;color:#1B2B5E;font-weight:700;margin-bottom:8px;">The Agent's Brief</div>
+    <p style="font-family:'Courier New',monospace;font-size:9px;color:#AAAAAA;letter-spacing:1px;line-height:1.8;margin:0;">Real estate insights, tools and community. Free.<br>theagentsbrief.com<br><br>Subscribe at theagentsbrief.com · Unsubscribe anytime.</p>
+  </div>
+
+  <div style="height:4px;background:#C9A84C;"></div>
+
+</div>
+
+<!-- Content Gate -->
+<div id="content-gate">
+  <div id="gate-box">
+    <div class="gate-title">You're reading The Agent's Brief</div>
+    <div class="gate-subtitle">Subscribe free to read the full issue including<br>the Agent Spotlight and this week's tools and prompts.</div>
+    <div class="gate-form">
+      <input type="email" class="gate-input" id="gate-email" placeholder="Enter your email address" />
+      <button class="gate-btn" onclick="handleGateSubmit()">Read Full Issue →</button>
+    </div>
+    <div class="gate-fine-print">FREE · NO SPAM · UNSUBSCRIBE ANYTIME</div>
+  </div>
+</div>
+
+<script>
+  var urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('subscribed') === 'true') {
+    localStorage.setItem('tab_subscribed', 'true');
+  }
+
+  var isSubscribed = localStorage.getItem('tab_subscribed') === 'true';
+
+  if (isSubscribed) {
+    document.getElementById('gated-sections').style.filter = 'none';
+    document.getElementById('gated-sections').style.pointerEvents = 'auto';
+  }
+
+  function showGate() {
+    if (!isSubscribed) {
+      document.getElementById('gated-sections').style.filter = 'blur(5px)';
+      document.getElementById('gated-sections').style.pointerEvents = 'none';
+      document.getElementById('gated-sections').style.userSelect = 'none';
+      document.getElementById('content-gate').style.display = 'block';
+    }
+  }
+
+  function handleGateSubmit() {
+    var email = document.getElementById('gate-email').value;
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+    gtag('event', 'gate_subscribe', {
+      'event_category': 'engagement',
+      'event_label': 'content_gate'
+    });
+    localStorage.setItem('tab_subscribed', 'true');
+    window.location.href = 'https://magic.beehiiv.com/v1/b17494d9-6f52-4107-a761-e4abaa93a26f?email=' + encodeURIComponent(email) + '&redirect_to=https%3A%2F%2Ftheagentsbrief.github.io%2FThe-Agent-s-Brief-Newsletter%2F%3Fsubscribed%3Dtrue';
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!isSubscribed && window.scrollY > 600) {
+      showGate();
+    }
+  });
+
+  gtag('event', 'page_view', {
+    'page_title': 'Agent Spotlight Issue',
+    'page_location': window.location.href
+  });
+</script>
+
+</body>
+</html>
