@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Spotlight — The Agent's Brief</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Mono:wght@400;500&display=swap');
+  :root { --navy:#1B2B5E; --gold:#C9A84C; --cream:#F7F4EF; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--navy); font-family:Georgia,serif; color:var(--cream); min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px; overflow-x:hidden; }
+  body::before { content:''; position:fixed; inset:0; background:radial-gradient(ellipse at 20% 50%,rgba(201,168,76,.06) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(201,168,76,.04) 0%,transparent 50%); pointer-events:none; }
+  .container { width:100%; max-width:560px; position:relative; z-index:1; }
+  .header { text-align:center; margin-bottom:32px; }
+  .brand { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:4px; color:var(--gold); text-transform:uppercase; margin-bottom:8px; }
+  .header h1 { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:600; color:var(--cream); letter-spacing:-.5px; line-height:1.1; }
+  .header h1 span { color:var(--gold); font-style:italic; }
+  .progress-container { margin-bottom:32px; }
+  .progress-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+  .progress-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; }
+  .progress-count { font-family:'DM Mono',monospace; font-size:11px; color:rgba(201,168,76,.6); }
+  .progress-track { height:2px; background:rgba(255,255,255,.08); border-radius:2px; overflow:hidden; }
+  .progress-fill { height:100%; background:var(--gold); border-radius:2px; transition:width .5s cubic-bezier(.4,0,.2,1); }
+  .card { background:rgba(255,255,255,.04); border:1px solid rgba(201,168,76,.2); border-radius:8px; padding:36px 40px; position:relative; overflow:hidden; }
+  .card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--gold); }
+  .step { display:none; animation:fadeUp .4s ease forwards; }
+  .step.active { display:block; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+  .step-category { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; color:var(--gold); text-transform:uppercase; margin-bottom:8px; }
+  .step-question { font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:600; color:var(--cream); margin-bottom:6px; line-height:1.2; }
+  .step-hint { font-size:13px; color:rgba(247,244,239,.45); margin-bottom:20px; line-height:1.6; font-style:italic; }
+  input[type=text],input[type=email],input[type=url],textarea { width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(201,168,76,.25); border-radius:4px; padding:14px 16px; font-family:Georgia,serif; font-size:15px; color:var(--cream); outline:none; transition:border-color .2s,background .2s; resize:none; line-height:1.6; }
+  input:focus,textarea:focus { border-color:var(--gold); background:rgba(201,168,76,.06); }
+  input::placeholder,textarea::placeholder { color:rgba(247,244,239,.25); font-style:italic; }
+  .nav { display:flex; justify-content:space-between; align-items:center; margin-top:24px; gap:12px; }
+  .btn { font-family:Georgia,serif; font-size:13px; font-weight:600; padding:12px 28px; border-radius:3px; border:none; cursor:pointer; transition:all .2s; letter-spacing:.3px; }
+  .btn-primary { background:var(--gold); color:var(--navy); flex:1; }
+  .btn-primary:hover { background:#b8962e; transform:translateY(-1px); }
+  .btn-back { background:transparent; color:rgba(247,244,239,.4); border:1px solid rgba(255,255,255,.1); min-width:80px; }
+  .btn-back:hover { color:var(--cream); border-color:rgba(255,255,255,.3); }
+  .btn-submit { background:var(--gold); color:var(--navy); flex:1; font-size:14px; padding:14px 32px; }
+  .btn-submit:hover { background:#b8962e; transform:translateY(-1px); }
+  .optional-tag { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; color:rgba(201,168,76,.5); text-transform:uppercase; margin-left:8px; }
+  .required-tag { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-left:8px; }
+  .success { display:none; text-align:center; padding:20px 0; animation:fadeUp .5s ease forwards; }
+  .success-icon { width:64px; height:64px; border:2px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:28px; }
+  .success h2 { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:600; color:var(--cream); margin-bottom:12px; }
+  .success p { font-size:14px; color:rgba(247,244,239,.55); line-height:1.7; margin-bottom:8px; }
+  .success .gold { color:var(--gold); }
+  .error-msg { font-family:'DM Mono',monospace; font-size:10px; color:#E07070; letter-spacing:1px; margin-top:6px; display:none; }
+  .char-count { font-family:'DM Mono',monospace; font-size:9px; color:rgba(201,168,76,.4); text-align:right; margin-top:4px; }
+  /* Email capture banner on step 3 */
+  .email-banner { background:rgba(201,168,76,.08); border:1px solid rgba(201,168,76,.3); border-radius:4px; padding:12px 16px; margin-bottom:16px; }
+  .email-banner-text { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; }
+  @media(max-width:500px){.card{padding:24px 20px}.step-question{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="brand">The Agent's Brief</div>
+    <h1>Agent <span>Spotlight</span></h1>
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-meta">
+      <span class="progress-label" id="progress-section">The Basics</span>
+      <span class="progress-count" id="progress-count">1 / 10</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:10%"></div>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <!-- Step 1: Name -->
+    <div class="step active" data-step="1">
+      <div class="step-category">The Basics · 1 of 3</div>
+      <div class="step-question">What's your full name?</div>
+      <div class="step-hint">How you'd like to be introduced to our readers.</div>
+      <input type="text" id="q1" placeholder="First and last name" maxlength="100" oninput="updateChar(this,'c1',100)">
+      <div class="char-count" id="c1"></div>
+      <div class="error-msg" id="e1">Please enter your name.</div>
+    </div>
+
+    <!-- Step 2: Market -->
+    <div class="step" data-step="2">
+      <div class="step-category">The Basics · 2 of 3</div>
+      <div class="step-question">Where do you work?</div>
+      <div class="step-hint">Your brokerage and the market you primarily serve.</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <input type="text" id="q2a" placeholder="Brokerage / Company name" maxlength="100">
+        <input type="text" id="q2b" placeholder="City, State (e.g. Austin, TX)" maxlength="100">
+      </div>
+      <div class="error-msg" id="e2">Please fill in both fields.</div>
+    </div>
+
+    <!-- Step 3: Contact — EMAIL REQUIRED -->
+    <div class="step" data-step="3">
+      <div class="step-category">The Basics · 3 of 3</div>
+      <div class="step-question">How can we reach you?</div>
+      <div class="step-hint">We'll follow up before publishing anything. Your email also subscribes you free to The Agent's Brief.</div>
+      <div class="email-banner">
+        <div class="email-banner-text">✦ Your email subscribes you free to The Agent's Brief</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <input type="email" id="q3a" placeholder="Email address (required)">
+        <input type="text" id="q3b" placeholder="Instagram handle (optional)" maxlength="60">
+        <input type="url" id="q3c" placeholder="Website (optional)">
+      </div>
+      <div class="error-msg" id="e3">Please enter a valid email address to continue.</div>
+    </div>
+
+    <!-- Step 4: Origin -->
+    <div class="step" data-step="4">
+      <div class="step-category">Your Story · 1 of 3</div>
+      <div class="step-question">How did you get into real estate?</div>
+      <div class="step-hint">A few sentences. Keep it real — no fluff needed.</div>
+      <textarea id="q4" rows="5" placeholder="Tell us how your journey started..." maxlength="600" oninput="updateChar(this,'c4',600)"></textarea>
+      <div class="char-count" id="c4"></div>
+      <div class="error-msg" id="e4">Please share a bit about your background.</div>
+    </div>
+
+    <!-- Step 5: Different -->
+    <div class="step" data-step="5">
+      <div class="step-category">Your Story · 2 of 3</div>
+      <div class="step-question">What makes your approach different?</div>
+      <div class="step-hint">What do you do that other agents in your market don't?</div>
+      <textarea id="q5" rows="5" placeholder="What sets you apart..." maxlength="600" oninput="updateChar(this,'c5',600)"></textarea>
+      <div class="char-count" id="c5"></div>
+      <div class="error-msg" id="e5">Please share what makes you different.</div>
+    </div>
+
+    <!-- Step 6: Market -->
+    <div class="step" data-step="6">
+      <div class="step-category">Your Story · 3 of 3</div>
+      <div class="step-question">What does your market look like right now?</div>
+      <div class="step-hint">Buyers market? Inventory? Rates? What are you seeing on the ground?</div>
+      <textarea id="q6" rows="5" placeholder="Give us your honest read on the market..." maxlength="600" oninput="updateChar(this,'c6',600)"></textarea>
+      <div class="char-count" id="c6"></div>
+      <div class="error-msg" id="e6">Please share your market insight.</div>
+    </div>
+
+    <!-- Step 7: Advice -->
+    <div class="step" data-step="7">
+      <div class="step-category">Your Insights · 1 of 2</div>
+      <div class="step-question">What do you wish more agents knew?</div>
+      <div class="step-hint">Advice, insight, or a hard truth from your experience.</div>
+      <textarea id="q7" rows="5" placeholder="What would you tell a newer agent today..." maxlength="600" oninput="updateChar(this,'c7',600)"></textarea>
+      <div class="char-count" id="c7"></div>
+      <div class="error-msg" id="e7">Please share your advice.</div>
+    </div>
+
+    <!-- Step 8: Promote -->
+    <div class="step" data-step="8">
+      <div class="step-category">Your Insights · 2 of 2</div>
+      <div class="step-question">What do you want the community to know?</div>
+      <div class="step-hint">A listing, a recent win, something you're working on — your space, use it however you want.</div>
+      <textarea id="q8" rows="5" placeholder="This is your platform — use it..." maxlength="600" oninput="updateChar(this,'c8',600)"></textarea>
+      <div class="char-count" id="c8"></div>
+      <div class="error-msg" id="e8">Please share something for the community.</div>
+    </div>
+
+    <!-- Step 9: Quote -->
+    <div class="step" data-step="9">
+      <div class="step-category">Your Quote</div>
+      <div class="step-question">Give us one quote.</div>
+      <div class="step-hint">Something that captures your philosophy, market insight, or advice. We'll feature this prominently — make it memorable.</div>
+      <textarea id="q9" rows="4" placeholder='"Your quote here..."' maxlength="300" oninput="updateChar(this,'c9',300)"></textarea>
+      <div class="char-count" id="c9"></div>
+      <div class="error-msg" id="e9">Please provide a quote.</div>
+    </div>
+
+    <!-- Step 10: Photo -->
+    <div class="step" data-step="10">
+      <div class="step-category">Your Photo</div>
+      <div class="step-question">Send us your photo. <span class="optional-tag">optional</span></div>
+      <div class="step-hint">A clear headshot or professional photo. Square format preferred. Paste a link below or email it to us after submitting.</div>
+      <input type="url" id="q10" placeholder="https://link-to-your-photo.com">
+      <div style="margin-top:16px;padding:14px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:4px;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;">OR EMAIL DIRECTLY</div>
+        <div style="font-size:13px;color:rgba(247,244,239,.5);">hello@theagentsbrief.com</div>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <div class="nav" id="nav">
+      <button class="btn btn-back" id="btn-back" onclick="prevStep()" style="display:none;">← Back</button>
+      <button class="btn btn-primary" id="btn-next" onclick="nextStep()">Continue →</button>
+    </div>
+
+    <!-- Success -->
+    <div class="success" id="success">
+      <div class="success-icon">✦</div>
+      <h2>You're in.</h2>
+      <p>Your submission is on its way to hello@theagentsbrief.com. We'll be in touch before we publish anything.</p>
+      <p class="gold">You're also now subscribed to The Agent's Brief — your free weekly newsletter starts Tuesday.</p>
+      <div style="margin-top:20px;padding:16px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:4px;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;">CHECK YOUR INBOX</div>
+        <div style="font-size:13px;color:rgba(247,244,239,.5);line-height:1.6;">A confirmation email is on its way. Click the link inside to confirm your subscription and get access to the free AI Prompt Pack.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const TOTAL=10;
+  let cur=1;
+  const secs={1:'The Basics',2:'The Basics',3:'The Basics',4:'Your Story',5:'Your Story',6:'Your Story',7:'Your Insights',8:'Your Insights',9:'Your Quote',10:'Your Photo'};
+
+  function updateProgress(){
+    document.getElementById('progress-fill').style.width=(cur/TOTAL*100)+'%';
+    document.getElementById('progress-count').textContent=cur+' / '+TOTAL;
+    document.getElementById('progress-section').textContent=secs[cur];
+  }
+
+  function updateChar(el,id,max){
+    const c=document.getElementById(id);
+    if(c) c.textContent=(max-el.value.length)+' characters remaining';
+  }
+
+  function validate(s){
+    const hide=id=>{const e=document.getElementById(id);if(e)e.style.display='none';};
+    const show=id=>{const e=document.getElementById(id);if(e)e.style.display='block';};
+    hide('e'+s);
+    if(s===1&&!document.getElementById('q1').value.trim()){show('e1');return false;}
+    if(s===2&&(!document.getElementById('q2a').value.trim()||!document.getElementById('q2b').value.trim())){show('e2');return false;}
+    if(s===3){
+      const re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if(!re.test(document.getElementById('q3a').value.trim())){show('e3');return false;}
+    }
+    if(s===4&&!document.getElementById('q4').value.trim()){show('e4');return false;}
+    if(s===5&&!document.getElementById('q5').value.trim()){show('e5');return false;}
+    if(s===6&&!document.getElementById('q6').value.trim()){show('e6');return false;}
+    if(s===7&&!document.getElementById('q7').value.trim()){show('e7');return false;}
+    if(s===8&&!document.getElementById('q8').value.trim()){show('e8');return false;}
+    if(s===9&&!document.getElementById('q9').value.trim()){show('e9');return false;}
+    return true;
+  }
+
+  function nextStep(){
+    if(!validate(cur))return;
+    if(cur===TOTAL){submitForm();return;}
+    document.querySelector('.step.active').classList.remove('active');
+    cur++;
+    updateProgress();
+    document.querySelector('[data-step="'+cur+'"]').classList.add('active');
+    const nb=document.getElementById('btn-next');
+    nb.textContent=cur===TOTAL?'Submit →':'Continue →';
+    nb.className=cur===TOTAL?'btn btn-submit':'btn btn-primary';
+    document.getElementById('btn-back').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function prevStep(){
+    if(cur===1)return;
+    document.querySelector('.step.active').classList.remove('active');
+    cur--;
+    updateProgress();
+    document.querySelector('[data-step="'+cur+'"]').classList.add('active');
+    if(cur===1)document.getElementById('btn-back').style.display='none';
+    const nb=document.getElementById('btn-next');
+    nb.textContent='Continue →';
+    nb.className='btn btn-primary';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function submitForm(){
+    const g=id=>document.getElementById(id).value.trim();
+    const email=g('q3a');
+
+    // Subscribe via Beehiiv magic link silently in background
+    const magicUrl='https://magic.beehiiv.com/v1/b17494d9-6f52-4107-a761-e4abaa93a26f?email='+encodeURIComponent(email);
+    fetch(magicUrl,{method:'GET',mode:'no-cors'}).catch(()=>{});
+    // Also open magic link to ensure subscription goes through
+    window.open(magicUrl,'_blank');
+
+    // Send submission via mailto
+    const subject=encodeURIComponent('Agent Spotlight Submission — '+g('q1'));
+    const body=encodeURIComponent(
+      'AGENT SPOTLIGHT SUBMISSION\n==========================\n\n'+
+      'NAME: '+g('q1')+'\nBROKERAGE: '+g('q2a')+'\nMARKET: '+g('q2b')+
+      '\nEMAIL: '+email+'\nINSTAGRAM: '+(g('q3b')||'Not provided')+
+      '\nWEBSITE: '+(g('q3c')||'Not provided')+
+      '\n\nHOW THEY GOT INTO REAL ESTATE:\n'+g('q4')+
+      '\n\nWHAT MAKES THEM DIFFERENT:\n'+g('q5')+
+      '\n\nMARKET CONDITIONS:\n'+g('q6')+
+      '\n\nADVICE FOR OTHER AGENTS:\n'+g('q7')+
+      '\n\nWHAT THEY WANT TO PROMOTE:\n'+g('q8')+
+      '\n\nTHEIR QUOTE:\n"'+g('q9')+'"\n\nPHOTO LINK: '+(g('q10')||'Will email separately')
+    );
+
+    // Small delay so magic link tab opens first
+    setTimeout(()=>{
+      window.location.href='mailto:hello@theagentsbrief.com?subject='+subject+'&body='+body;
+    },800);
+
+    // Show success
+    document.querySelectorAll('.step').forEach(s=>s.style.display='none');
+    document.getElementById('nav').style.display='none';
+    document.getElementById('success').style.display='block';
+    document.getElementById('progress-container').style.display='none';
+  }
+
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();nextStep();}
+  });
+
+  updateProgress();
+</script>
+</body>
+</html>
