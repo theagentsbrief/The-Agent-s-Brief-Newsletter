@@ -104,7 +104,7 @@
 <!-- Sticky Subscribe Bar -->
 <div style="position:sticky;top:0;z-index:998;background:#C9A84C;padding:12px 20px;text-align:center;">
   <span style="font-family:Georgia,serif;font-size:13px;color:#1B2B5E;font-weight:600;margin-right:16px;">The Agent's Brief — Free weekly AI newsletter for real estate agents.</span>
-  <a href="https://magic.beehiiv.com/v1/b17494d9-6f52-4107-a761-e4abaa93a26f" style="display:inline-block;background:#1B2B5E;color:#C9A84C;font-family:Georgia,serif;font-size:12px;font-weight:700;padding:8px 20px;text-decoration:none;border-radius:2px;letter-spacing:0.5px;">Subscribe Free →</a>
+  <a href="https://magic.beehiiv.com/v1/b17494d9-6f52-4107-a761-e4abaa93a26f?email={{email}}&redirect_to=https%3A%2F%2Ftheagentsbrief.github.io%2FThe-Agent-s-Brief-Newsletter%2F%3Fsubscribed%3Dtrue" style="display:inline-block;background:#1B2B5E;color:#C9A84C;font-family:Georgia,serif;font-size:12px;font-weight:700;padding:8px 20px;text-decoration:none;border-radius:2px;letter-spacing:0.5px;">Subscribe Free →</a>
 </div>
 
 <div style="max-width:620px;margin:0 auto;background:#FFFFFF;">
@@ -202,12 +202,12 @@
   <div style="background:#1B2B5E;padding:36px 40px;text-align:center;">
     <div style="font-family:Georgia,serif;font-size:22px;font-weight:700;color:#F7F4EF;margin-bottom:8px;">Get the Free AI Prompt Pack</div>
     <p style="font-size:13px;color:#9AA8C4;margin-bottom:24px;line-height:1.6;">10 copy-paste prompts for listings, follow-ups,<br>objections, cold outreach, and commission conversations.</p>
-    <a href="https://magic.beehiiv.com/v1/b17494d9-6f52-4107-a761-e4abaa93a26f" style="display:inline-block;background:#C9A84C;color:#1B2B5E;font-family:Georgia,serif;font-size:13px;font-weight:bold;padding:14px 36px;text-decoration:none;letter-spacing:0.5px;border-radius:2px;">Subscribe Free at theagentsbrief.com</a>
+    <a href="https://magic.beehiiv.com/v1/b17494d9-6f52-4107-a761-e4abaa93a26f?email={{email}}&redirect_to=https%3A%2F%2Ftheagentsbrief.github.io%2FThe-Agent-s-Brief-Newsletter%2F%3Fsubscribed%3Dtrue" style="display:inline-block;background:#C9A84C;color:#1B2B5E;font-family:Georgia,serif;font-size:13px;font-weight:bold;padding:14px 36px;text-decoration:none;letter-spacing:0.5px;border-radius:2px;">Subscribe Free at theagentsbrief.com</a>
   </div>
 
   <div style="background:#F7F4EF;padding:24px 40px;text-align:center;border-top:1px solid #E8E3DA;">
     <div style="font-family:Georgia,serif;font-size:18px;color:#1B2B5E;font-weight:700;margin-bottom:8px;">The Agent's Brief</div>
-    <p style="font-family:'Courier New',monospace;font-size:9px;color:#AAAAAA;letter-spacing:1px;line-height:1.8;margin:0;">AI tools and strategies for real estate agents. Every Tuesday — free.<br>theagentsbrief.com<br><br>Subscribe at subscribe.theagentsbrief.com<br>Unsubscribe anytime.</p>
+    <p style="font-family:'Courier New',monospace;font-size:9px;color:#AAAAAA;letter-spacing:1px;line-height:1.8;margin:0;">AI tools and strategies for real estate agents. Every Tuesday — free.<br>theagentsbrief.com<br><br>Subscribe at theagentsbrief.com<br>Unsubscribe anytime.</p>
   </div>
 
   <div style="height:4px;background:#C9A84C;"></div>
@@ -228,7 +228,6 @@
 </div>
 
 <script>
-  // Check URL for returning subscriber
   var urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get('subscribed') === 'true') {
     localStorage.setItem('tab_subscribed', 'true');
@@ -236,7 +235,6 @@
 
   var isSubscribed = localStorage.getItem('tab_subscribed') === 'true';
 
-  // If already subscribed show full content immediately
   if (isSubscribed) {
     document.getElementById('gated-sections').style.filter = 'none';
     document.getElementById('gated-sections').style.pointerEvents = 'auto';
@@ -263,7 +261,7 @@
       'event_label': 'content_gate'
     });
     localStorage.setItem('tab_subscribed', 'true');
-    window.location.href = 'https://magic.beehiiv.com/v1/b17494d9-6f52-4107-a761-e4abaa93a26f?email=' + encodeURIComponent(email) + '&redirect=' + encodeURIComponent('https://theagentsbrief.github.io/The-Agent-s-Brief-Newsletter/?subscribed=true');
+    window.location.href = 'https://magic.beehiiv.com/v1/b17494d9-6f52-4107-a761-e4abaa93a26f?email=' + encodeURIComponent(email) + '&redirect_to=https%3A%2F%2Ftheagentsbrief.github.io%2FThe-Agent-s-Brief-Newsletter%2F%3Fsubscribed%3Dtrue';
   }
 
   window.addEventListener('scroll', function() {
